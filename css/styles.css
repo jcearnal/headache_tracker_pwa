@@ -54,6 +54,19 @@ ul.dropdown-content.select-dropdown li.active span, ul.dropdown-content.select-d
     margin-bottom: 5px;
 }
 
+/* Default font size for larger screens */
+.navbar-title {
+    font-size: 2rem; /* Default size */
+}
+
+/* Media query for small screens (phones) */
+@media only screen and (max-width: 600px) {
+    .navbar-title {
+        font-size: 1.5rem; /* Smaller font for mobile */
+    }
+}
+
+
 #logo {
     max-width: 100%;
     height: auto;
