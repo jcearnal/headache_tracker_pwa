@@ -2,7 +2,7 @@
   "name": "Headache Tracker",
   "short_name": "HeadTrack",
   "description": "Track your headaches and symptoms with ease.",
-  "start_url": "/index.html",
+  "start_url": "/headache_tracker_pwa/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2196F3",
