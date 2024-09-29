@@ -1,10 +1,10 @@
 # Headache Tracker PWA
 
-This Progressive Web App (PWA) allows users to log and track their headaches, including details such as duration, severity, and whether they had to leave work or lay down. The app also features offline functionality and installability for easy access and logging on mobile devices.
+This Progressive Web App (PWA) PROTOTYPE allows users to log and track their headaches, including details such as duration, severity, and whether they had to leave work or lay down. The app also features offline functionality and installability for easy access and logging on mobile devices.
 
 ## Live Demo
 You can view and install the app by navigating to the following URL:
-`https://your-app-url.com/` *(Replace this with your actual URL)*
+`https://jcearnal.github.io/headache_tracker_pwa/`
 
 ## Features
 
