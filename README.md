@@ -84,6 +84,3 @@ The repository includes:
 
 4. Optionally, you can host the app on a local server (like Live Server in VS Code) to test installability and PWA features.
 
-## License
-
-This project is licensed under the MIT License.
