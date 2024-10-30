@@ -1,148 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Headache Tracker</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Headache Tracker</title>
 
-  <link rel="stylesheet" href="css/materialize.min.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/materialize.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="img/favicon.png" type="image/png" />
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body class="grey lighten-4">
-  <!-- Navbar -->
-  <nav class="nav-wrapper blue">
+    <!-- Preload fonts and SVGs with correct crossorigin attributes -->
+    <link
+      rel="preload"
+      href="fonts/pacifico-regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/send_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg"
+      as="image"
+      type="image/svg+xml"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/menu_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg"
+      as="image"
+      type="image/svg+xml"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/chevron_left_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg"
+      as="image"
+      type="image/svg+xml"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="fonts/chevron_right_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg"
+      as="image"
+      type="image/svg+xml"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body class="grey lighten-4">
+    <!-- Navbar -->
+    <nav class="nav-wrapper blue">
+      <div class="container">
+        <a href="#" class="brand-logo left">
+          <img src="./img/logo_small.png" alt="Headache Tracker Small Logo" id="logo-small" />
+        </a>
+        <a href="#" class="brand-logo center white-text pacifico-regular">
+          <span class="navbar-title">Headache Tracker</span>
+        </a>
+        <a href="#" class="right">
+          <img
+            src="./fonts/menu_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg"
+            alt="Menu Icon"
+            style="width: 36px; height: 36px"
+          />
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container center-align" style="padding-top: 40px">
+      <img src="./img/logo.png" alt="Headache Tracker Logo" class="responsive-img" id="logo" />
+    </div>
+
     <div class="container">
-      <!-- Small Logo on the Left Side of Navbar -->
-      <a href="#" class="brand-logo left">
-        <img src="img/logo_small.png" alt="Headache Tracker Small Logo" id="logo-small">
-      </a>
-      <!-- App Name with Pacifico Font in the Center -->
-      <a href="#" class="brand-logo center white-text pacifico-regular">
-        <span class="navbar-title">Headache Tracker</span>
-      </a>
-      <!-- Hamburger Menu Icon on the Right Side -->
-      <a href="#" class="right">
-        <i class="material-icons white-text" style="font-size: 36px;">menu</i>
-      </a>
-    </div>
-  </nav>
+      <h4 class="blue-text text-darken-3" style="margin-bottom: 30px">Log a Headache</h4>
 
-  <!-- Main Content -->
-  <div class="container center-align" style="padding-top: 40px;">
-    <img src="img/logo.png" alt="Headache Tracker Logo" class="responsive-img" id="logo">
-  </div>
-
-  <div class="container">
-    <h4 class="blue-text text-darken-3" style="margin-bottom: 30px;">Log a Headache</h4>
-
-    <!-- Form -->
-    <form id="headacheForm">
-      <div class="input-field" style="margin-bottom: 30px;">
-        <input id="duration" type="number" class="validate">
-        <label for="duration">Duration (in hours)</label>
-      </div>
-
-      <div class="input-field">
-        <select id="severity">
-          <option value="" disabled selected>Choose Severity</option>
-          <option value="1">Mild</option>
-          <option value="2">Moderate</option>
-          <option value="3">Severe</option>
-        </select>
-        <label for="severity">Severity</label>
-      </div>
-
-      <p>
-        <label>
-          <input type="checkbox" id="leaveWork"/>
-          <span>Did you leave work/school?</span>
-        </label>
-      </p>
-
-      <p>
-        <label>
-          <input type="checkbox" id="layDown"/>
-          <span>Did you need to lay down?</span>
-        </label>
-      </p>
-
-      <div class="right-align" style="padding-top: 20px; padding-bottom: 20px;">
-        <button class="btn waves-effect waves-light blue" type="submit" name="action">Log Headache
-          <i class="material-icons right">send</i>
-        </button>
-      </div>
-    </form>
-
-    <!-- Headache History -->
-    <h5 class="blue-text text-darken-3">Your Headache History</h5>
-    <ul class="collection">
-      <li class="collection-item grey lighten-5">
-        <div class="row">
-          <div class="col s12 m2"><strong>Duration:</strong> 2 hours</div>
-          <div class="col s12 m2"><strong>Severity:</strong> Mild</div>
-          <div class="col s12 m3"><strong>Left Work/School:</strong> No</div>
-          <div class="col s12 m3"><strong>Laid Down:</strong> Yes</div>
-          <div class="col s12 m2"><strong>Date:</strong> 2024-09-25</div>
+      <form id="headacheForm">
+        <div class="input-field" style="margin-bottom: 30px">
+          <input id="duration" type="number" class="validate" />
+          <label for="duration">Duration (in hours)</label>
         </div>
-      </li>
-      <li class="collection-item grey lighten-5">
-        <div class="row">
-          <div class="col s12 m2"><strong>Duration:</strong> 4 hours</div>
-          <div class="col s12 m2"><strong>Severity:</strong> Moderate</div>
-          <div class="col s12 m3"><strong>Left Work/School:</strong> Yes</div>
-          <div class="col s12 m3"><strong>Laid Down:</strong> Yes</div>
-          <div class="col s12 m2"><strong>Date:</strong> 2024-09-20</div>
-        </div>
-      </li>
-      <li class="collection-item grey lighten-5">
-        <div class="row">
-          <div class="col s12 m2"><strong>Duration:</strong> 1.5 hours</div>
-          <div class="col s12 m2"><strong>Severity:</strong> Severe</div>
-          <div class="col s12 m3"><strong>Left Work/School:</strong> No</div>
-          <div class="col s12 m3"><strong>Laid Down:</strong> No</div>
-          <div class="col s12 m2"><strong>Date:</strong> 2024-09-18</div>
-        </div>
-      </li>
-    </ul>    
 
-    <!-- Pagination -->
-    <ul class="pagination center-align">
-      <li class="waves-effect"><a href="#"><i class="material-icons">chevron_left</i></a></li>
-      <li class="active blue"><a href="#">1</a></li>
-      <li class="waves-effect"><a href="#">2</a></li>
-      <li class="waves-effect"><a href="#">3</a></li>
-      <li class="waves-effect"><a href="#">4</a></li>
-      <li class="waves-effect"><a href="#">5</a></li>
-      <li class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
-    </ul>
+        <div class="input-field">
+          <select id="severity">
+            <option value="" disabled selected>Choose Severity</option>
+            <option value="1">Mild</option>
+            <option value="2">Moderate</option>
+            <option value="3">Severe</option>
+          </select>
+          <label for="severity">Severity</label>
+        </div>
 
-    <!-- Show All Button -->
-    <div class="center-align" style="padding-bottom: 50px;">
-      <a class="waves-effect waves-light btn blue" href="#">Show All</a>
+        <p>
+          <label>
+            <input type="checkbox" id="leaveWork" />
+            <span>Did you leave work/school?</span>
+          </label>
+        </p>
+
+        <p>
+          <label>
+            <input type="checkbox" id="layDown" />
+            <span>Did you need to lay down?</span>
+          </label>
+        </p>
+
+        <div class="right-align" style="padding-top: 20px; padding-bottom: 20px">
+          <button class="btn waves-effect waves-light blue" type="submit" name="action">
+            Log Headache
+            <img
+              src="./fonts/send_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg"
+              alt="Send Icon"
+              style="width: 24px; height: 24px; margin-left: 8px"
+            />
+          </button>
+        </div>
+      </form>
+
+      <h5 class="blue-text text-darken-3">Your Headache History</h5>
+      <ul class="collection" id="historyList">
+        <li class="collection-item grey lighten-5">
+          <div class="row">
+            <div class="col s12 m2"><strong>Duration:</strong> 2 hours</div>
+            <div class="col s12 m2"><strong>Severity:</strong> Mild</div>
+            <div class="col s12 m3"><strong>Left Work/School:</strong> No</div>
+            <div class="col s12 m3"><strong>Laid Down:</strong> Yes</div>
+            <div class="col s12 m2"><strong>Date:</strong> 2024-09-25</div>
+          </div>
+        </li>
+        <li class="collection-item grey lighten-5">
+          <div class="row">
+            <div class="col s12 m2"><strong>Duration:</strong> 4 hours</div>
+            <div class="col s12 m2"><strong>Severity:</strong> Moderate</div>
+            <div class="col s12 m3"><strong>Left Work/School:</strong> Yes</div>
+            <div class="col s12 m3"><strong>Laid Down:</strong> Yes</div>
+            <div class="col s12 m2"><strong>Date:</strong> 2024-09-20</div>
+          </div>
+        </li>
+      </ul>
+
+      <ul class="pagination center-align">
+        <li class="waves-effect">
+          <a href="#"><img src="./fonts/chevron_left_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Left Chevron" style="width: 24px" /></a>
+        </li>
+        <li class="active blue"><a href="#">1</a></li>
+        <li class="waves-effect">
+          <a href="#"><img src="./fonts/chevron_right_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="Right Chevron" style="width: 24px" /></a>
+        </li>
+      </ul>
+
+      <!-- Export and Print Buttons -->
+      <div class="section center-align">
+        <a class="waves-effect waves-light btn blue" href="#" id="exportCSV">Export to CSV</a>
+        <a class="waves-effect waves-light btn blue" href="#" onclick="window.print()">Print</a>
+      </div>
     </div>
 
-    <!-- Export and Print Buttons -->
-    <div class="section center-align">
-        <a class="waves-effect waves-light btn blue" href="#">Export to CSV</a>
-        <a class="waves-effect waves-light btn blue" href="#">Print</a>
-    </div>
-  </div>
-    
-  <script src="js/materialize.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('select');
-      M.FormSelect.init(elems);
-    });
-  </script>
-</body>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

@@ -8,10 +8,43 @@ h4, h5 {
     color: #1565c0;
 }
 
-.pacifico-regular {
-    font-family: "Pacifico", cursive;
+/* Pacifico font with priority to ensure it applies */
+@font-face {
+    font-family: 'Pacifico';
+    src: url('../fonts/pacifico-regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
+}
+
+.pacifico-regular {
+    font-family: "Pacifico", cursive, sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Navbar and logo */
+#logo-small {
+    height: 40px; 
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+/* Default font size for the navbar title */
+.navbar-title {
+    font-family: "Pacifico", cursive; 
+    font-size: 2rem; 
+    white-space: nowrap; /
+}
+
+/* Media query for small screens (phones) */
+@media only screen and (max-width: 600px) {
+    .navbar-title {
+        font-size: 1.5rem;
+    }
+
+    #logo-small {
+        height: 32px;
+    }
 }
 
 /* Form input fields */
@@ -39,38 +72,14 @@ ul.dropdown-content.select-dropdown li span {
     color: #000;
 }
 
-ul.dropdown-content.select-dropdown li.active, ul.dropdown-content.select-dropdown li:hover {
+ul.dropdown-content.select-dropdown li.active, 
+ul.dropdown-content.select-dropdown li:hover {
     background-color: #e3f2fd;
 }
 
-ul.dropdown-content.select-dropdown li.active span, ul.dropdown-content.select-dropdown li:hover span {
+ul.dropdown-content.select-dropdown li.active span, 
+ul.dropdown-content.select-dropdown li:hover span {
     color: #212121;
-}
-
-/* Navbar and logo */
-#logo-small {
-    height: 50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-/* Default font size for larger screens */
-.navbar-title {
-    font-size: 2rem; /* Default size */
-}
-
-/* Media query for small screens (phones) */
-@media only screen and (max-width: 600px) {
-    .navbar-title {
-        font-size: 1.5rem; /* Smaller font for mobile */
-    }
-}
-
-
-#logo {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
 }
 
 /* Alternating background for collection items */
@@ -81,7 +90,6 @@ ul.collection li.collection-item:nth-child(odd) {
 ul.collection li.collection-item:nth-child(even) {
     background-color: #f5f6fc !important; /* White for even items */
 }
-
 
 /* Button and pagination styles */
 .btn {

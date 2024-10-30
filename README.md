@@ -1,6 +1,16 @@
 # Headache Tracker PWA
 
-This Progressive Web App (PWA) PROTOTYPE allows users to log and track their headaches, including details such as duration, severity, and whether they had to leave work or lay down. The app also features offline functionality and installability for easy access and logging on mobile devices.
+This Progressive Web App (PWA) prototype allows users to log and track their headaches, including details such as duration, severity, and whether they had to leave work or lay down. The app features offline functionality and installability for easy access and logging on mobile devices and desktops.
+
+## Screenshots
+
+### App Screenshot (Wide)
+
+![Wide Screenshot](img/screenshot-wide.png)
+
+### App Screenshot (Narrow)
+
+![Narrow Screenshot](img/screenshot-narrow.png)
 
 ## Live Demo
 You can view and install the app by navigating to the following URL:
@@ -18,9 +28,19 @@ You can view and install the app by navigating to the following URL:
 
 This PWA is built using HTML, CSS (Materialize Framework), and JavaScript. It incorporates core PWA features, such as:
 
-- **Service Worker**: Caches essential assets to ensure offline access to the app.
-- **Manifest**: Allows users to install the app on their devices.
-- **Responsive Design**: The app adjusts to different screen sizes, from mobile phones to desktops.
+- **Service Worker**: 
+  - A service worker is registered to enable offline access and caching of essential assets.
+  - It implements a caching strategy to store resources like HTML, CSS, JavaScript, and images, ensuring that the app remains functional without an internet connection.
+  - The service worker intercepts network requests and serves cached assets when offline, providing a smooth user experience.
+
+- **Manifest**: 
+  - The `manifest.json` file contains metadata about the app, allowing users to install it on their devices.
+  - Key properties include:
+    - **name**: The full name of the app, displayed on the user's home screen.
+    - **short_name**: A shorter version of the name for the home screen icon.
+    - **icons**: Specifies different sizes of icons for various devices, ensuring a responsive design.
+    - **start_url**: Defines the starting point of the app when launched from the home screen.
+    - **display**: Set to `standalone` to make the app look like a native application.
 
 ## How to Use
 
@@ -55,14 +75,14 @@ This PWA is built using HTML, CSS (Materialize Framework), and JavaScript. It in
 - **HTML**: Used for structuring the app content.
 - **CSS (Materialize Framework)**: Used for styling the app and making it responsive.
 - **JavaScript**: Handles the interactive functionality and service worker registration.
-- **Service Worker**: Caches assets for offline use.
-- **Manifest**: Provides metadata for the app and enables installability.
+- **Service Worker**: Caches assets for offline use and intercepts network requests.
+- **Manifest**: Provides metadata for the app and enables installability, making the app accessible from the home screen.
 
 ## Repository
 
 You can find the full source code on GitHub:
 
-`https://github.com/jcearnal/headache-tracker-pwa` *(Replace this with your actual GitHub repository URL)*
+`https://github.com/jcearnal/headache-tracker-pwa` 
 
 The repository includes:
 
@@ -83,4 +103,3 @@ The repository includes:
 3. Open the `index.html` file in a browser to view and test the app.
 
 4. Optionally, you can host the app on a local server (like Live Server in VS Code) to test installability and PWA features.
-

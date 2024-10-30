@@ -2,10 +2,10 @@
   "name": "Headache Tracker",
   "short_name": "HeadTrack",
   "description": "Track your headaches and symptoms with ease.",
-  "start_url": "/headache_tracker_pwa/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2196F3",
+  "background_color": "#f5f5f5",
+  "theme_color": "#42a5f5",
   "icons": [
     {
       "src": "img/icon-192.png",
@@ -16,6 +16,20 @@
       "src": "img/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "img/screenshot-narrow.png",
+      "sizes": "350x760",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "img/screenshot-wide.png",
+      "sizes": "2553x1295",
+      "type": "image/png",
+      "form_factor": "wide"
     }
   ]
 }
