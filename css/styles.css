@@ -9,12 +9,6 @@ h4, h5 {
 }
 
 /* Pacifico font with priority to ensure it applies */
-@font-face {
-    font-family: 'Pacifico';
-    src: url('../fonts/pacifico-regular.ttf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}
 
 .pacifico-regular {
     font-family: "Pacifico", cursive, sans-serif !important;
