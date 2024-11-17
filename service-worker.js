@@ -12,7 +12,7 @@ const staticAssets = [
   './img/icon-512.png',
   './img/logo.png',
   './img/logo_small.png',
-  './fonts/pacifico-regular.ttf',
+  './fonts/Pacifico-Regular.ttf',
   './fonts/menu_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg',
   './fonts/send_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg',
   './fonts/chevron_left_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg',
