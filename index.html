@@ -7,11 +7,9 @@
 
     <link rel="stylesheet" href="css/materialize.min.css" />
     <link rel="stylesheet" href="css/styles.css" />
-
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" href="img/favicon.png" type="image/png" />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
 
     <style>
       /* CSS for printing only the Headache History section */
@@ -38,11 +36,12 @@
   <body class="grey lighten-4">
     <!-- Notification Area -->
     <div
-    id="notification"
-    style="display: none; position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background: #e0f7fa; color: #00695c; padding: 10px 20px; border: 1px solid #004d40; border-radius: 5px; z-index: 1000;"
-  >
-    <span id="notificationMessage"></span>
-  </div>
+      id="notification"
+      style="display: none; position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background: #e0f7fa; color: #00695c; padding: 10px 20px; border: 1px solid #004d40; border-radius: 5px; z-index: 1000;"
+    >
+      <span id="notificationMessage"></span>
+    </div>
+
     <!-- Navbar -->
     <nav class="nav-wrapper blue">
       <div class="container">
@@ -53,16 +52,21 @@
           <span class="navbar-title">Headache Tracker</span>
         </a>
       </div>
-    </nav>      
-    
+    </nav>
 
-    <!-- Main Content -->
-    <div class="container center-align" style="padding-top: 40px">
-      <img src="./img/logo.png" alt="Headache Tracker Logo" class="responsive-img" id="logo" />
+    <!-- Authentication Container -->
+    <div id="auth-container" class="container center-align" style="margin-top: 40px">
+      <h4>Welcome to Headache Tracker</h4>
+      <button id="googleSignIn" class="btn blue">Sign In with Google</button>
     </div>
 
-    <div class="container">
-      <h4 class="blue-text text-darken-3" style="margin-bottom: 30px">Log a Headache</h4>
+    <!-- Main App Container -->
+    <div id="app-container" class="container" style="display: none;">
+      <div class="center-align" style="padding-top: 40px">
+        <img src="./img/logo.png" alt="Headache Tracker Logo" class="responsive-img" id="logo" />
+      </div>
+
+      <h4 id="welcome-message" class="blue-text text-darken-3" style="margin-bottom: 30px"></h4>
 
       <form id="headacheForm">
         <div class="input-field" style="margin-bottom: 30px">
@@ -96,12 +100,7 @@
 
         <div class="right-align" style="padding-top: 20px; padding-bottom: 20px">
           <button class="btn waves-effect waves-light blue" type="submit" name="action">
-            Log Headache
-            <img
-              src="./fonts/send_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg"
-              alt="Send Icon"
-              style="width: 24px; height: 24px; margin-left: 8px"
-            />
+            Log Headache            
           </button>
         </div>
       </form>
@@ -113,162 +112,16 @@
 
       <!-- Print Buttons -->
       <div class="section center-align">
-        <a class="waves-effect waves-light btn blue" href="#" onclick="window.print()">Print</a>
+        <a class="waves-effect waves-light btn blue" href="#" onclick="window.print()">Print Headache Log</a>
+        <button id="printSignOutButton" class="btn red" style="display: none;">Sign Out</button>
       </div>
+
       
+    </div>
 
-    <!-- Firebase Integration -->
-    <script type="module" src="js/main.js">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-      import { getDatabase, ref, set, remove, onValue } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyBs5BBaurAUW3H6BniAo122fuLoz1PYQgQ",
-        authDomain: "tracker-24eae.firebaseapp.com",
-        databaseURL: "https://tracker-24eae-default-rtdb.firebaseio.com",
-        projectId: "tracker-24eae",
-        storageBucket: "tracker-24eae.appspot.com",
-        messagingSenderId: "857208368290",
-        appId: "1:857208368290:web:d2c04dbdf41581e92e3bfb",
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-
-      const writeHeadacheLog = (id, data) => {
-        set(ref(db, "headaches/" + id), data)
-          .then(() => console.log("Data written successfully"))
-          .catch((err) => console.error("Error writing data:", err));
-      };
-
-      const fetchHeadacheLogs = async () => {
-      const historyList = document.getElementById('historyList');
-      const loadingIndicator = `<li class="collection-item grey lighten-5">Loading...</li>`;
-      historyList.innerHTML = loadingIndicator;
-
-      console.log("Checking network status:", navigator.onLine);
-
-      if (navigator.onLine) {
-        // Online - fetch from Firebase
-        const headachesRef = ref(db, 'headaches/');
-        onValue(
-          headachesRef,
-          (snapshot) => {
-            const data = snapshot.val();
-            console.log("Logs fetched from Firebase:", data);
-            historyList.innerHTML = '';
-            if (data) {
-              const sortedLogs = Object.entries(data).sort(
-                (a, b) => new Date(b[1].date).getTime() - new Date(a[1].date).getTime()
-              );
-              sortedLogs.forEach(([id, log]) => {
-                const listItem = `
-                  <li class="collection-item grey lighten-5">
-                    <div class="row">
-                      <div class="col s12 m2"><strong>Duration:</strong> ${log.duration} hours</div>
-                      <div class="col s12 m2"><strong>Severity:</strong> ${log.severity}</div>
-                      <div class="col s12 m3"><strong>Left Work/School:</strong> ${log.leaveWork ? 'Yes' : 'No'}</div>
-                      <div class="col s12 m3"><strong>Laid Down:</strong> ${log.layDown ? 'Yes' : 'No'}</div>
-                      <div class="col s12 m2"><strong>Date:</strong> ${new Date(log.date).toLocaleString()}</div>
-                    </div>
-                    <button class="btn red" onclick="deleteLog('${id}')">Delete</button>
-                  </li>
-                `;
-                historyList.insertAdjacentHTML('beforeend', listItem);
-              });
-            } else {
-              historyList.innerHTML = '<li class="collection-item grey lighten-5">No headache logs found.</li>';
-            }
-          },
-          (error) => {
-            console.error("Error fetching logs:", error);
-            historyList.innerHTML = '<li class="collection-item grey lighten-5">Failed to load logs. Please try again later.</li>';
-          }
-        );
-      } else {
-        // Offline - fetch from IndexedDB
-        console.log("Offline - Fetching from IndexedDB");
-        const logs = await getFromIndexedDB();
-        console.log("Logs fetched from IndexedDB:", logs);
-        historyList.innerHTML = '';
-        if (logs.length > 0) {
-          logs.forEach((log) => {
-            const listItem = `
-              <li class="collection-item grey lighten-5">
-                <div class="row">
-                  <div class="col s12 m2"><strong>Duration:</strong> ${log.duration} hours</div>
-                  <div class="col s12 m2"><strong>Severity:</strong> ${log.severity}</div>
-                  <div class="col s12 m3"><strong>Left Work/School:</strong> ${log.leaveWork ? 'Yes' : 'No'}</div>
-                  <div class="col s12 m3"><strong>Laid Down:</strong> ${log.layDown ? 'Yes' : 'No'}</div>
-                  <div class="col s12 m2"><strong>Date:</strong> ${new Date(log.date).toLocaleString()}</div>
-                </div>
-                <button class="btn red" onclick="deleteLog('${log.id}')">Delete</button>
-              </li>
-            `;
-            historyList.insertAdjacentHTML('beforeend', listItem);
-          });
-        } else {
-          historyList.innerHTML = '<li class="collection-item grey lighten-5">No headache logs found.</li>';
-        }
-      }
-    };
-
-
-      window.deleteLog = (id) => {
-        if (confirm("Are you sure you want to delete this log?")) {
-          remove(ref(db, "headaches/" + id))
-            .then(() => {
-              console.log(`Log ${id} deleted.`);
-              fetchHeadacheLogs();
-            })
-            .catch((err) => console.error("Error deleting log:", err));
-        }
-      };
-
-      document.addEventListener('DOMContentLoaded', function () {
-      const form = document.getElementById('headacheForm');
-
-      // Form submission logic
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const duration = document.getElementById('duration').value;
-        const severity = document.getElementById('severity').value;
-        const leaveWork = document.getElementById('leaveWork').checked;
-        const layDown = document.getElementById('layDown').checked;
-
-        if (!duration || !severity) {
-          alert("Please fill out all required fields.");
-          return;
-        }
-
-        const headacheData = {
-          id: Date.now(),
-          duration,
-          severity,
-          leaveWork,
-          layDown,
-          date: new Date().toISOString(),
-        };
-
-        console.log("Headache Data:", headacheData); // Debugging: Check that the data is correct
-
-        if (navigator.onLine) {
-          writeHeadacheLog(headacheData.id, headacheData);  // Write to Firebase if online
-        } else {
-          await saveToIndexedDB(headacheData);  // Save to IndexedDB if offline
-          alert("You're offline. Your headache log was saved locally and will sync when you're online.");
-        }
-
-        form.reset();
-        M.updateTextFields();
-      });
-
-      fetchHeadacheLogs();  // Initial fetch on page load
-    });
-
-    </script>
-
+    <!-- Include Scripts -->
+    <script src="js/main.js" type="module"></script>
+    <script src="js/headache.js" type="module"></script>
     <script src="js/materialize.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -279,7 +132,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./service-worker.js')  // Use / for root path
+          navigator.serviceWorker.register('./service-worker.js')
             .then((registration) => {
               console.log('Service Worker registered with scope:', registration.scope);
             })
@@ -289,8 +142,5 @@
         });
       }
     </script>
-    
-
   </body>
-  
 </html>

@@ -1,6 +1,6 @@
 # Headache Tracker PWA
 
-This Progressive Web App (PWA) prototype allows users to log and track their headaches, including details such as duration, severity, and whether they had to leave work or lay down. The app features offline functionality using IndexedDB and cloud storage with Firebase, ensuring a seamless experience for users even without an internet connection.
+This Progressive Web App (PWA) allows users to log and track their headaches, including details such as duration, severity, and whether they had to leave work or lay down. The app features offline functionality using IndexedDB and cloud storage with Firebase, ensuring a seamless experience for users even without an internet connection.
 
 ## Screenshots
 

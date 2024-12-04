@@ -1,4 +1,4 @@
-const cacheName = 'headache-tracker-v10';
+const cacheName = 'headache-tracker-v12'; // Incremented cache version
 const staticAssets = [
   './',
   './index.html',
@@ -6,6 +6,7 @@ const staticAssets = [
   './css/styles.css',
   './js/materialize.min.js',
   './js/main.js',
+  './js/headache.js', // Ensure all JS files are included
   './manifest.json',
   './img/favicon.png',
   './img/icon-192.png',
@@ -18,8 +19,8 @@ const staticAssets = [
   './fonts/chevron_right_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg',
   './fonts/trash_can_icon.svg',
   './offline.html',
-  'https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js', // Firebase app
-  'https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js' // Firebase database
+  'https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js',
+  'https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js',
 ];
 
 // Install Event
@@ -61,13 +62,24 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
-  // Firebase Realtime Database Requests
-  if (url.origin === "https://tracker-24eae-default-rtdb.firebaseio.com") {
-    console.log(`[Service Worker] Bypassing cache for Firebase request: ${req.url}`);
+  // Bypass cache for Firebase Authentication API requests
+  if (url.origin === 'https://identitytoolkit.googleapis.com') {
+    console.log(`[Service Worker] Bypassing cache for Firebase Auth API: ${req.url}`);
+    event.respondWith(fetch(req).catch((error) => {
+      console.error('[Service Worker] Network error for Firebase Auth API:', error);
+      return new Response('Auth API unavailable', { status: 503 });
+    }));
+    return;
+  }
+
+  // Bypass cache for Firebase Realtime Database requests
+  if (url.origin === 'https://tracker-24eae-default-rtdb.firebaseio.com') {
+    console.log(`[Service Worker] Bypassing cache for Firebase Database request: ${req.url}`);
     event.respondWith(fetch(req));
     return;
   }
 
+  // Default caching strategies
   if (url.origin === location.origin) {
     event.respondWith(cacheFirst(req));
   } else {
